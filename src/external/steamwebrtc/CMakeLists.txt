@@ -798,6 +798,9 @@ set_target_common_gns_properties(steamwebrtc)
 
 target_link_libraries(steamwebrtc
 	webrtc-lite
+	OpenSSL::Crypto
+	OpenSSL::SSL
+	${ABSEIL_DEPENDENCIES}
 	)
 
 set_target_properties(steamwebrtc PROPERTIES

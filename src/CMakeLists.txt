@@ -115,6 +115,9 @@ endmacro()
 # If WebRTC enabled, build the thin wrapper library
 if(USE_STEAMWEBRTC)
 	add_subdirectory(external/steamwebrtc)
+	set(GNS_CLIENTLIB_SRCS ${GNS_CLIENTLIB_SRCS}
+		"steamnetworkingsockets/clientlib/steamnetworkingsockets_p2p_webrtc.cpp"
+		)
 endif(USE_STEAMWEBRTC)
 
 set(GNS_COMMON_FLAGS
@@ -249,6 +252,7 @@ macro(set_clientlib_target_properties GNS_TARGET)
 		# Wrapper lib is always linked statically in the opensource code.
 		# We might link dynamically in other environments.
 		target_compile_definitions(${GNS_TARGET} PRIVATE
+			STEAMNETWORKINGSOCKETS_ENABLE_WEBRTC
 			STEAMWEBRTC_USE_STATIC_LIBS
 			)
 		target_link_libraries(${GNS_TARGET} PUBLIC
